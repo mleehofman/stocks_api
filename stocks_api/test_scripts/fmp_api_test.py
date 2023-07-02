@@ -15,7 +15,8 @@ def test_load_api_keys():
 
     test = os.getenv("API_KEY")
 
-    print('ok')
+    print('ok la')
+
 
 # Company Valuation Methods
 symbol: str = "AAPL"
