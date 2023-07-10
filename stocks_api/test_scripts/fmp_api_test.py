@@ -17,7 +17,8 @@ class SimpleTestScripts:
     def test_iterating_stock_list(self):
 
         for symbol in self.stock_list:
-            test_income_statement = self.technical_functions.get_income_statement(api_key=self.api_key, symbol=symbol)
+            self.technical_functions.get_income_statement(api_key=self.api_key, symbol=symbol)
+            self.technical_functions.get_technical_indicators(api_key=self.api_key, symbol=symbol)
 
 
 SimpleTestScripts(EssentialFinancialInformation)
