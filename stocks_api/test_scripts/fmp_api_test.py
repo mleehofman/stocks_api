@@ -17,8 +17,10 @@ class SimpleTestScripts:
     def test_iterating_stock_list(self):
 
         for symbol in self.stock_list:
-            self.technical_functions.get_income_statement(api_key=self.api_key, symbol=symbol)
-            self.technical_functions.get_technical_indicators(api_key=self.api_key, symbol=symbol)
+            income_statement = self.technical_functions.get_income_statement(api_key=self.api_key, symbol=symbol)
+            # self.technical_functions.get_technical_indicators(api_key=self.api_key, symbol=symbol)
+            enterprise_values = self.technical_functions.get_enterprise_values(api_key=self.api_key, symbol=symbol)
+            self.technical_functions.calculate_ev_ebitda(income_statement, enterprise_values)
 
 
 SimpleTestScripts(EssentialFinancialInformation)

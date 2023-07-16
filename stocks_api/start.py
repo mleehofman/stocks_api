@@ -2,8 +2,12 @@ import os
 import fmpsdk
 from dotenv import load_dotenv
 
-stock_list = ["QFIN", "AHLA", "AMZ", "AAPL", "BIDU", "BSX", "5DQ2", "GRU", "MLB1", "MSFT", "08D", "NEE", "SAR", "SHELL"
-    , "LLAP"]
+stock_list = ["QFIN", "AHLA"]
+    # , "AMZ", "AAPL", "BIDU", "BSX", "5DQ2", "GRU", "MLB1", "MSFT", "08D", "NEE", "SAR", "SHELL"
+    # , "LLAP"]
+
+quarter = 'quarter'
+annual = 'annual'
 
 
 class APIFunctions:
@@ -14,7 +18,7 @@ class APIFunctions:
 
     def load_api_keys(self):
         load_dotenv()
-        apikey = os.getenv("API_KEY")
+        apikey = os.getenv("FMP_API_KEY")
         return apikey
 
 
