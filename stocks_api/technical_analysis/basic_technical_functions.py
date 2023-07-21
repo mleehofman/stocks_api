@@ -13,10 +13,10 @@ class EssentialFinancialInformation:
 
     @classmethod
     def get_income_statement(cls, api_key, symbol):
-        return fmpsdk.income_statement(apikey=api_key, symbol=symbol, period=quarter)
-        # ebitda = income_statement[0]['ebitda']
+        test = fmpsdk.available_traded_list(apikey=api_key)
+        type = 'ok'
         print('ok')
-        # df = pd.DataFrame(income_statement)
+        return fmpsdk.income_statement(apikey=api_key, symbol=symbol, period=quarter)
 
     @classmethod
     def get_enterprise_values(cls, api_key, symbol):
@@ -29,8 +29,22 @@ class EssentialFinancialInformation:
         df = pd.DataFrame(technical_indicators)
 
     @classmethod
+    def get_available_commodities(cls, api_key):
+        return fmpsdk.available_commodities(apikey=api_key)
+
+    @classmethod
     def calculate_ev_ebitda(cls, income_statement, enterprise_values):
+        if len(income_statement) == 0 or len(enterprise_values) == 0:
+            ##TODO: add warning
+            return
         ev_ebitda = enterprise_values[0]['enterpriseValue'] / income_statement[0]['ebitda']
-        print(ev_ebitda)
-        ##TODO: trigger when ev_ebitda ration is < 10
+
+        print(income_statement[0]['symbol'])
+
+        ##TODO: trigger when ev_ebitda ration is <15
+
+        print(f"the ratio is {ev_ebitda}")
+
+        # if ev_ebitda < 15:
+        #     print(f"the ratio is below 15, namely {ev_ebitda}")
 

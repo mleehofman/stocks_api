@@ -2,12 +2,15 @@ import os
 import fmpsdk
 from dotenv import load_dotenv
 
-stock_list = ["QFIN", "AHLA"]
-    # , "AMZ", "AAPL", "BIDU", "BSX", "5DQ2", "GRU", "MLB1", "MSFT", "08D", "NEE", "SAR", "SHELL"
-    # , "LLAP"]
+stock_list = ["QFIN", "AHLA"
+    , "AMZ", "AAPL", "BIDU", "BSX", "5DQ2", "GRU", "MLB1", "MSFT", "08D", "NEE", "SAR", "SHELL"
+    , "LLAP"]
+
+undervaluedstocklist = ['ALB','BX','TRVC']
 
 quarter = 'quarter'
 annual = 'annual'
+api_request_per_minute = 300
 
 
 class APIFunctions:
@@ -22,12 +25,13 @@ class APIFunctions:
         return apikey
 
 
-class StockList:
+class TradesList:
     """Class for obtaining or generating list of stocks"""
 
-    def __init__(self, stock_list_input):
-        self.stock_list_input = stock_list_input
-        self.return_stock_list()
+    def __init__(self):
+        # self.stock_list_input = stock_list_input
+        self.api_functions = APIFunctions()
+        self.api_key = self.api_functions.load_api_keys()
 
-    def get_stock_list(self):
-        return self.stock_list_input
+    def get_trades_list(self, api_key):
+        return fmpsdk.available_traded_list(apikey=api_key)

@@ -20,17 +20,33 @@ from stocks_api.start import APIFunctions
 # print('ok')
 
 
-api_key = APIFunctions.load_api_keys(None)
+# api_key = APIFunctions.load_api_keys(None)
 
 
-url = (f"https://financialmodelingprep.com/api/v3/enterprise-values/AAPL?apikey={api_key}")
-print('ok')
+# url = (f"https://financialmodelingprep.com/api/v3/enterprise-values/AAPL?apikey={api_key}")
+# print('ok')
 
 # symbol = "AAPL"
 # api_key = "api_key"
 # r = requests.get('https://api-football-v1.p.rapidapi.com/v3/fixtures/', params=url_params)
-rtest = requests.get(url)
+# rtest = requests.get(url)
 
 print('test')
 #
 # response = requests.request("GET", rtest.url)
+
+
+
+class A:
+    def method_a(self, a, b):
+        return a + b
+
+
+class B:
+    def method_b(self, a, b):
+        return A().method_a(a, b)
+
+
+b1 = B()
+
+print(b1.method_b(10, 15))  # 👉️ 25
