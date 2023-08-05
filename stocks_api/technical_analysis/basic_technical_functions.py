@@ -20,6 +20,7 @@ class EssentialFinancialInformation:
 
     @classmethod
     def get_enterprise_values(cls, api_key, symbol):
+        print('ok')
         return fmpsdk.enterprise_values(apikey=api_key, symbol=symbol, period=quarter)
         # df = pd.DataFrame(enterprise_values)
 

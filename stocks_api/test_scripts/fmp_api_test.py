@@ -7,7 +7,9 @@ class SimpleTestScripts:
     def __init__(self, start_functions: APIFunctions, technical_functions: EssentialFinancialInformation):
         self.api_key = self.test_load_api_key()
         self.trades_list_class = TradesList()
+
         self.trades_list = self.trades_list_class.get_trades_list(self.api_key)
+        print('ok')
         # self.test = [stock for stock in self.stock_list]
         trade_categories = []
         exchange_list = []
@@ -19,8 +21,8 @@ class SimpleTestScripts:
                 exchange_list.append(trade['exchangeShortName'])
         # stock_list = [stock for stock in self.stock_list if stock['type'] == 'stock']
 
-        # self.technical_functions = technical_functions
-        # stock_list = self.technical_functions.get_available_commodities(api_key=self.api_key)
+        self.technical_functions = technical_functions
+        # self.stock_list = self.technical_functions.get_available_commodities(api_key=self.api_key)
         print('ok')
         self.test_iterating_stock_list()
 
@@ -30,11 +32,12 @@ class SimpleTestScripts:
 
     def test_iterating_stock_list(self):
 
-        for symbol in self.stock_list:
+        for symbol in self.trades_list:
             income_statement = self.technical_functions.get_income_statement(api_key=self.api_key, symbol=symbol)
             # self.technical_functions.get_technical_indicators(api_key=self.api_key, symbol=symbol)
             enterprise_values = self.technical_functions.get_enterprise_values(api_key=self.api_key, symbol=symbol)
             self.technical_functions.calculate_ev_ebitda(income_statement, enterprise_values)
+            print('ok')
 
 
 SimpleTestScripts(APIFunctions, EssentialFinancialInformation)
