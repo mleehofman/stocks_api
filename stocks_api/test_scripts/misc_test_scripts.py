@@ -49,4 +49,5 @@ class B:
 
 b1 = B()
 
+
 print(b1.method_b(10, 15))  # 👉️ 25

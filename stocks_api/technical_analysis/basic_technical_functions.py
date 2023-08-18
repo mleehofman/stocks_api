@@ -2,58 +2,51 @@
 # import signal
 # import sys
 import asyncio
+import inspect
 import aiohttp
 # import json
+import time
 import fmpsdk
 import pandas as pd
 # from IPython.display import display
 from stocks_api.start import APIFunctions, QUARTER
 
 
-class EssentialFinancialInformation:# pylint: disable=too-few-public-methods
-    """Class to obtain financial information about trade"""
-    def __init__(self):
+class EssentialFinancialInformation:
+
+    def __init__(self, symbol):
+        self.symbol = symbol
         self.api_functions = APIFunctions()
         self.api_key = self.api_functions.load_api_keys()
-        # self.loop = asyncio.get_event_loop()
-        # self.client = aiohttp.ClientSession(loop=self.loop)
+        self.trades_loop = asyncio.run(self.main())
 
-    # async def task(self, name, work_queue):
-    #     """Class to obtain financial information about trade"""
-    #     async with aiohttp.ClientSession() as session:
-    #         while not work_queue.empty():
-    #             url = await work_queue.get()
-    #             print(f"Task {name} getting URL: {url}")
-    #
-    #             async with session.get(url) as response:
-    #                 await response.text()
-    #
-    # async def main(self):
-    #     """
-    #     This is the main entry point for the program
-    #     """
-    #     # Create the queue of work
-    #     work_queue = asyncio.Queue()
-    #
-    #     # Put some work in the queue
-    #     for url in [
-    #         "http://google.com",
-    #         "http://yahoo.com",
-    #         "http://linkedin.com",
-    #         "http://apple.com",
-    #         "http://microsoft.com",
-    #         "http://facebook.com",
-    #         "http://twitter.com",
-    #     ]:
-    #         await work_queue.put(url)
-    #
-    #     # Run the tasks
-    #
-    #     await asyncio.gather(
-    #         asyncio.create_task(self.task("One", work_queue)),
-    #         asyncio.create_task(self.task("Two", work_queue)),
-    #     )
+    async def get_financial_information(self, delay, what):
+        # await asyncio.sleep(1)
+        print(time.time(),'Start say_after(%s, %s)' % (delay,what))
+        await asyncio.sleep(delay)
+        print(time.time(),what)
+        print('now time to get financial information')
+        income_statement = fmpsdk.income_statement(apikey=self.api_key, symbol=self.symbol, period=QUARTER)
+        enterprise_values = fmpsdk.enterprise_values(apikey=self.api_key, symbol=self.symbol, period=QUARTER)
+        balance_sheet = fmpsdk.balance_sheet_statement_as_reported(apikey=self.api_key, symbol=self.symbol)
 
+
+        fmpsdk.historical_chart(
+
+        )
+        print(income_statement)
+        print(enterprise_values)
+        print(balance_sheet)
+
+        return income_statement, enterprise_values
+
+    async def main(self):
+        start_time = time.time()
+        print(start_time, 'Before creating tasks.')
+        task1 = asyncio.create_task(self.get_financial_information(0,'hello'))
+        await task1
+        end_time = time.time()
+        print('Total time elapsed: %.2f seconds' % (end_time - start_time))
 
 
 class SyncEssentialFinancialInformation:
@@ -64,24 +57,10 @@ class SyncEssentialFinancialInformation:
         self.api_key = self.api_functions.load_api_keys()
 
     @classmethod
-    def get_income_statement(cls, api_key, symbol):
-        """Obtain a company's income statement"""
-        # test = fmpsdk.available_traded_list(apikey=api_key)
-        # type = 'ok'
-        # print('ok')
-        return fmpsdk.income_statement(apikey=api_key, symbol=symbol, period=QUARTER)
-
-    @classmethod
-    def get_enterprise_values(cls, api_key, symbol):
-        """Obtain a company's enterprise values"""
-        return fmpsdk.enterprise_values(apikey=api_key, symbol=symbol, period=QUARTER)
-        # df = pd.DataFrame(enterprise_values)
-
-    @classmethod
     def get_technical_indicators(cls, api_key, symbol):
         """Obtain a company's technical indications"""
         technical_indicators = \
-            fmpsdk.technical_indicators(apikey=api_key, symbol=symbol, statistics_type='sma')
+            fmpsdk.technical_indicators(apikey=api_key, symbol=symbol)
         data_frame = pd.DataFrame(technical_indicators)
         print(data_frame)
 

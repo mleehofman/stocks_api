@@ -1,10 +1,10 @@
 from stocks_api.start import APIFunctions, TradesList
-from stocks_api.technical_analysis.basic_technical_functions import SyncEssentialFinancialInformation
+from stocks_api.technical_analysis.basic_technical_functions import SyncEssentialFinancialInformation, EssentialFinancialInformation
 
 
 class SimpleTestScripts:
 
-    def __init__(self, start_functions: APIFunctions, technical_functions: SyncEssentialFinancialInformation):
+    def __init__(self, start_functions: APIFunctions, technical_functions: EssentialFinancialInformation):
         self.api_key = self.test_load_api_key()
         self.traded_list_class = TradesList()
 
@@ -21,17 +21,34 @@ class SimpleTestScripts:
         return api_functions.load_api_keys()
 
     def test_iterating_stock_list(self):
-
-
         index = 0
-        while index < len(self.traded_list):
-            for symbol in self.traded_list[index]:
-                print(self.traded_list[index][symbol])
+        # while index < 4:
+        # len(self.traded_list):
+        for idx, trade in enumerate(self.traded_list):
+            print(idx)
+            if idx > 15:
+                break
+            # for trade in self.traded_list:
+            #     # print(self.traded_list[index][symbol])
+            #     # print(self.traded_list[index][symbol])
+            if trade['type'] != 'stock':
+                print(trade['symbol'])
+                print('is not a stock: ')
+                print(trade['type'])
+                continue
+            print('now let us anaylyze a stock')
+            print(trade['symbol'])
+            print('exchange')
+            print(trade['exchange'])
+            self.technical_functions(trade['symbol'])
+
+
+
                 # income_statement = self.technical_functions.get_income_statement(api_key=self.api_key, symbol=symbol)
                 # # self.technical_functions.get_technical_indicators(api_key=self.api_key, symbol=symbol)
                 # enterprise_values = self.technical_functions.get_enterprise_values(api_key=self.api_key, symbol=symbol)
                 # self.technical_functions.calculate_ev_ebitda(income_statement, enterprise_values)
-            index += 1
+
         # for symbol in self.trades_list:
         #     print(symbol)
             # income_statement = self.technical_functions.get_income_statement(api_key=self.api_key, symbol=symbol)
@@ -39,9 +56,9 @@ class SimpleTestScripts:
             # enterprise_values = self.technical_functions.get_enterprise_values(api_key=self.api_key, symbol=symbol)
             # self.technical_functions.calculate_ev_ebitda(income_statement, enterprise_values)
             # print('ok')
+    print('ok')
 
-
-SimpleTestScripts(APIFunctions, SyncEssentialFinancialInformation)
+SimpleTestScripts(APIFunctions, EssentialFinancialInformation)
 
 
 
