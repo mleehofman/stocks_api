@@ -1,5 +1,5 @@
 from stocks_api.start import APIFunctions, TradesList
-from stocks_api.technical_analysis.basic_technical_functions import EssentialFinancialInformation
+from stocks_api.technical_analysis.basic_technical_functions import EssentialFinancialInformation, Globals
 
 
 class SimpleTestScripts:
@@ -11,7 +11,6 @@ class SimpleTestScripts:
         self.trade_exchange_categories = self.traded_list_class.get_trade_exchange_categories(self.traded_list)
         self.technical_functions = technical_functions
         self.test_iterating_stock_list()
-
 
     def test_load_api_key(self):
         """function to load API Key"""
@@ -35,5 +34,8 @@ class SimpleTestScripts:
             print('exchange')
             print(trade['exchange'])
             self.technical_functions(trade['symbol'])
+
+        return Globals.STOCK_DATAFRAME
+
 
 SimpleTestScripts(EssentialFinancialInformation)

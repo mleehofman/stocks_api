@@ -58,7 +58,7 @@ class EssentialFinancialInformation:
 
         Globals.STOCK_DATAFRAME = pd.concat([Globals.STOCK_DATAFRAME, result_df], ignore_index=True)
 
-        # print('ok')
+        print('ok')
 
 
 
@@ -109,3 +109,4 @@ class EssentialFinancialInformation:
         await task1
         end_time = time.time()
         print('Total time elapsed: %.2f seconds' % (end_time - start_time))
+

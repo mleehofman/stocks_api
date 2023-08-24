@@ -1,6 +1,7 @@
 import finnhub
 import requests
 from stocks_api.start import APIFunctions
+import asyncio
 
 # # Setup client
 # finnhub_client = finnhub.Client(api_key="ciq1401r01qihcguc03gciq1401r01qihcguc040")
@@ -31,23 +32,82 @@ from stocks_api.start import APIFunctions
 # r = requests.get('https://api-football-v1.p.rapidapi.com/v3/fixtures/', params=url_params)
 # rtest = requests.get(url)
 
-print('test')
+
 #
 # response = requests.request("GET", rtest.url)
 
+stock_metrics = []
+
+# define an asynchronous iterator
+class CustomIterator():
+    # constructor, define some state
+    def __init__(self, length):
+        self.counter = 0
+        self.length = length
+
+    # create an instance of the iterator
+    def __aiter__(self):
+        return self
+
+    # return the next awaitable
+    async def __anext__(self):
+        # check for no further items
+        if self.counter >= self.length:
+            raise StopAsyncIteration
+        # block to simulate work
+        await metric()
+        # increment the counter
+        self.counter += 1
+        # return the ratio
+        return stock_metrics
 
 
-class A:
-    def method_a(self, a, b):
-        return a + b
+async def metric():
+    stock_metrics.append('test')
+
+# define a simple coroutine
+async def custom_coroutine():
+    # asynchronous for loop
+    async for item in CustomIterator(10):
+        # report the result
+        print(item)
+
+# start
+
+coro = custom_coroutine()
+asyncio.run(coro)
 
 
-class B:
-    def method_b(self, a, b):
-        return A().method_a(a, b)
 
 
-b1 = B()
-
-
-print(b1.method_b(10, 15))  # 👉️ 25
+# # define an asynchronous iterator
+# class CustomIterator():
+#     # constructor, define some state
+#     def __init__(self):
+#         self.counter = 0
+#
+#     # create an instance of the iterator
+#     def __aiter__(self):
+#         return self
+#
+#     # return the next awaitable
+#     async def __anext__(self):
+#         # check for no further items
+#         if self.counter >= 10:
+#             raise StopAsyncIteration
+#         # block to simulate work
+#         await asyncio.sleep(1)
+#         # increment the counter
+#         self.counter += 1
+#         # return the counter value
+#         return 'bla'
+#
+# # define a simple coroutine
+# async def custom_coroutine():
+#     # asynchronous for loop
+#     async for item in CustomIterator():
+#         # report the result
+#         print('test: ' + str(item))
+#
+# # start
+# asyncio.run(custom_coroutine())
