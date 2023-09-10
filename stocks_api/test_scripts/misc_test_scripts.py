@@ -111,3 +111,34 @@ asyncio.run(coro)
 #
 # # start
 # asyncio.run(custom_coroutine())
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample data
+data = {'Date': ['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04'],
+        'Value': [10, 15, 13, 20]}
+
+# Create a Pandas DataFrame from the data
+df = pd.DataFrame(data)
+
+# Convert the 'Date' column to a datetime object (if not already)
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Set 'Date' as the index (required for time-series plotting)
+df.set_index('Date', inplace=True)
+
+# Create a Pandas Series from the 'Value' column
+my_series = df['Value']
+
+# Plot the Pandas Series
+my_series.plot()
+
+# Add labels and title
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.title('My Series Plot')
+
+# Show the plot
+plt.show()

@@ -22,6 +22,7 @@ class SimpleTestScripts:
         for idx, trade in enumerate(self.traded_list):
             print(idx)
             if idx > 15:
+                print('time to quit')
                 break
 
             if trade['type'] != 'stock':
