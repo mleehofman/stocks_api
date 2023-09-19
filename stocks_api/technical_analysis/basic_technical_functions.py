@@ -25,6 +25,7 @@ class EssentialFinancialInformation:
         print(time.time(),'Start say_after(%s, %s)' % (delay,what))
         print(time.time(),what)
         print('now time to get financial information')
+        print('test commit')
         # income_statement = fmpsdk.income_statement(apikey=self.api_key, symbol=self.symbol, period=QUARTER)
         # enterprise_values = fmpsdk.enterprise_values(apikey=self.api_key, symbol=self.symbol, period=QUARTER)
         # balance_sheet = fmpsdk.balance_sheet_statement_as_reported(apikey=self.api_key, symbol=self.symbol)
