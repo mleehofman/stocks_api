@@ -1,8 +1,8 @@
 from stocks_api.start import APIFunctions, TradesList
 from stocks_api.technical_analysis.basic_technical_functions import EssentialFinancialInformation, Globals
+import unittest
 
-
-class SimpleTestScripts:
+class TestSimpleTestScripts(unittest.TestCase):
     """Class for testing iterating stocks for analysis"""
     def __init__(self, technical_functions: EssentialFinancialInformation):
         self.empty_stocklist()
@@ -45,4 +45,41 @@ class SimpleTestScripts:
         return Globals.STOCK_DATAFRAME
 
 
-SimpleTestScripts(EssentialFinancialInformation)
+# def test_iterating_stock_list():
+#     """function to iterate stock list"""
+#     new_obj = EssentialFinancialInformation
+#     # object = TestSimpleTestScripts(EssentialFinancialInformation)
+#
+#     print('ok')
+    # for idx, trade in enumerate(object.traded_list):
+    #     print(idx)
+    #     if idx > 15:
+    #         print('time to quit')
+    #         break
+    #
+    #     if trade['type'] != 'stock':
+    #         print(trade['symbol'])
+    #         print('is not a stock: ')
+    #         print(trade['type'])
+    #         continue
+    #     print('now let us analyze a stock please')
+    #     print(trade['symbol'])
+    #     print('exchange')
+    #     print(trade['exchange'])
+    #     TestSimpleTestScripts.technical_functions(trade['symbol'])
+    #
+    #     print('ok')
+    #     return Globals.STOCK_DATAFRAME
+
+# def main():
+#     TestSimpleTestScripts(EssentialFinancialInformation)
+#
+#
+# if __name__ == "__main__":
+#     # stuff only to run when not called via 'import' here
+#     main()
+
+
+
+TestSimpleTestScripts(EssentialFinancialInformation)
+
