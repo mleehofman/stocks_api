@@ -16,7 +16,7 @@ class TestSimpleTestScripts(unittest.TestCase):
     def empty_stocklist(self):
         Globals.STOCK_DATAFRAME.drop(Globals.STOCK_DATAFRAME.index, inplace=True)
         empty_check = Globals.STOCK_DATAFRAME.empty
-        # a check for commit
+        # a second check commit
         print(f'is the dataframe empty: {empty_check}')
 
     def test_load_api_key(self):
